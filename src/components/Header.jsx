@@ -27,7 +27,7 @@ const Header = props => {
     <FlexWrapEle>
       <Logo>
         <a className='logo' href='#' onClick={handleClick}>
-          logo
+          헤더
         </a>
       </Logo>
       <ButtonWrap>
@@ -46,7 +46,14 @@ const Header = props => {
   );
 };
 
-const Logo = styled.h1``;
+const Logo = styled.h1`
+
+`;
+
+const LogoImage = styled.div`
+
+`;
+
 const ButtonWrap = styled.ul`
   padding-left: 0;
   list-style: none;

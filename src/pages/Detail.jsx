@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { commentActions } from '../redux/modules/comment';
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import PetsIcon from '@mui/icons-material/Pets';
+
 import Post from '../components/Post';
 import Comment from '../components/Comment';
 import ButtonEle from '../elements/ButtonEle';
@@ -31,7 +33,7 @@ const Detail = props => {
   };
 
   return (
-    <>
+    <DetailWrap>
       <Post />
       <Form>
         <InputBox>
@@ -46,14 +48,24 @@ const Detail = props => {
             onChange={handleChange}
           />
         </InputBox>
-        <ButtonEle onClick={writeComment}>댓글작성</ButtonEle>
+        <ButtonEle onClick={writeComment}><PetsIcon/></ButtonEle>
       </Form>
       <CommentList>
         <Comment />
       </CommentList>
-    </>
+    </DetailWrap>
   );
 };
+
+const DetailWrap = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  min-width: 330px;
+  max-width: 500px;
+  width: 50%;
+  margin: auto;
+`;
 
 const Form = styled.form`
   display: flex;
@@ -68,9 +80,12 @@ const Form = styled.form`
   }
 `;
 
-const InputBox = styled.div``;
+const InputBox = styled.div`
+  padding: 0px 0px 0px 16px; 
+`;
 
 const CommentList = styled.ul`
+  padding:16px;
   padding-left: 0;
   list-style: none;
 `;

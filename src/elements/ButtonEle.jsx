@@ -7,9 +7,9 @@ const ButtonEle = ({ children, ...rest }) => {
 
 const Button = styled.button`
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 10px 15px;
-  background-color: #4a78e8;
+  background-color: #95E1D3;
   color: #fff;
   cursor: pointer;
 
