@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import PetsIcon from '@mui/icons-material/Pets';
 import { history } from "../redux/configureStore";
 import Post from "../components/Post";
 import { useEffect } from "react";
@@ -42,6 +43,7 @@ const PostList = (props) => {
         <Post />
       </PostBox>
       <AddPostButton>
+        <PetsIcon/>
       </AddPostButton>
       <Footer />
     </React.Fragment>
@@ -49,14 +51,19 @@ const PostList = (props) => {
 };
 
 const MainBanner = styled.div`
+  background-image: url("https://cdn.pixabay.com/photo/2017/09/25/13/12/cocker-spaniel-2785074_960_720.jpg");
+  background-size: cover;
+  background-position: center;
   width: 100vw;
   height: 300px;
   background-color: #bbded6;
+
 `;
 
 const PostBox = styled.div`
   justify-content: space-around;
   flex-wrap: wrap;
+  align-content:flex-start;
   display: flex;
   width: 50%;
   min-width: 330px;
@@ -66,15 +73,19 @@ const PostBox = styled.div`
   box-sizing: border-box;
 `;
 
-const AddPostButton = styled.div`
+const AddPostButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position fixed;
   bottom: 145px;
   right: 150px;
   width: 60px;
   height: 60px;
   border-radius: 50px;
-  background-color: red;
+  background-color: #FCE38A;
   cursor: pointer;
+  color: #475F77;
   border: 4px outset #ffa899;
   &:hover {
     border: 4px inset #ff9785;
