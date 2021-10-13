@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./redux/configureStore";
 
-function App() {
+import Login from "./pages/Login";
+import PostList from "./pages/PostList";
+import Detail from "./pages/PostList";
+
+// 위에서 만든 axios를 모듈화한 apis를 불러와줍니다.
+
+const App = (props) => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <ConnectedRouter history={history}>
+        <Route path="/" exact component={PostList} />
+        <Route path="/Login" exact component={Login}/>
+        <Route path="/detail" exact component={Detail} />
+      </ConnectedRouter>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
