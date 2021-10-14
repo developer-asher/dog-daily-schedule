@@ -42,7 +42,9 @@ const PostList = (props) => {
         <Post />
         <Post />
       </PostBox>
-      <AddPostButton>
+      <AddPostButton onClick={() => {
+        history.push("/write");
+      }}>
         <PetsIcon/>
       </AddPostButton>
       <Footer />
