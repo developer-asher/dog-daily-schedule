@@ -1,10 +1,14 @@
 import React from 'react'
 
+import ButtonEle from '../elements/ButtonEle';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+
+import UploadIcon from '@mui/icons-material/Upload';
 const Upload = () => {
   return (
     <React.Fragment>
       <input type="file"/>
-      <button>업로드하기</button>
+      <ButtonEle><UploadIcon/></ButtonEle>
     </React.Fragment>
   )
 }

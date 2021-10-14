@@ -6,7 +6,12 @@ const ImageEle = ({ children, ...rest }) => {
 };
 
 const Image = styled.img`
-  width: 100%;
+margin: 30px 0px;
+  background-color: blue;
+  height: 380px;
+  width: 80%;
+  min-width: 330px;
+  max-width: 450px;
 `;
 
 export default ImageEle;

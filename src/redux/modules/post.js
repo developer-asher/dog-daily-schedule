@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../modules/axios";
+import moment, { Moment } from "moment";
 
 //---- action -----//
 const SET_POST = "SET_POST";
@@ -10,21 +11,51 @@ const ADD_POST = "ADD_POST";
 const setPost = createAction(SET_POST, (post_list) => ({post_list}));
 const addPost = createAction(ADD_POST, (post) => ({post}));
 
+/* 초기화 */
 const initialState = {
   list: [],
 }
 
+/* post 초기화 */
 const initialPost = {
-  postid:0,
-  username: "조성민",
-  date: "2021-10-11 15:51",
+  // postid:0,
+  // username: "조성민",
+  date: moment().format("YYYY-MM-DD hh:mm:ss"),
   title: "댕댕이의 하루일과",
   imageurl:
     "https://t1.daumcdn.net/liveboard/holapet/0e5f90af436e4c218343073164a5f657.JPG",
-  content: "콘텐츠 내용이야",
+  content: "",
 }
 
+
 // ---- middleware actions ---- //
+/* post 추가 */
+const addPostFB = (contents="",) => {
+  return function (dispatch, getState, {history}){
+    // const postDB = firestore.collection("post");
+    const _user = getState().user.user;
+
+    const user_info = {
+     user_name: _user.user_name,
+    };
+
+    const _post = {
+      ...initialPost,
+      contents: contents,
+      date: moment().format("YYYY-MM-DD hh:mm:ss"),
+    };
+    
+    // postDB 컬렉션에 넣을수있는 정보인지 확인 //
+    console.log({...user_info, ..._post})
+
+    // postDB.add({...user_info, ..._post}).then((doc) => {
+
+    // }).catch((err) => {
+    //   console.log("post 작성에 실패했어요!", err);
+    // })
+  }
+}
+
 const getPostMiddleware = () => {
   return (dispatch) => {
   
@@ -64,6 +95,7 @@ const actionCreator = {
   setPost,
   addPost,
   getPostMiddleware,
+  addPostFB
 }
 
 export {actionCreator};
