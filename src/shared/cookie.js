@@ -8,9 +8,9 @@ const setCookie = (name, value, exp = 5) => {
 };
 
 const removeCookie = name => {
-  const exp = new Date.toUTCString('1991-12-02');
+  const exp = new Date().toUTCString('2020-01-01');
 
-  document.cookie = `${name}=;expires=${exp}`;
+  document.cookie = `${name}=; expires=${exp};`;
 };
 
 export { getCookie, setCookie, removeCookie };
