@@ -1,7 +1,16 @@
 const getCookie = name => {};
 
-const setCookie = (name, value, exp = 5) => {};
+const setCookie = (name, value, exp = 5) => {
+  let date = new Date();
+  date.setDate(date.getDate() + exp * 24 * 60 * 60 * 1000);
 
-const removeCookie = name => {};
+  document.cookie = `${name}=${value};expires='${date.toUTCString()}';`;
+};
+
+const removeCookie = name => {
+  const exp = new Date.toUTCString('1991-12-02');
+
+  document.cookie = `${name}=;expires=${exp}`;
+};
 
 export { getCookie, setCookie, removeCookie };
