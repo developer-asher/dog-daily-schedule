@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import ButtonEle from '../elements/ButtonEle';
 
-const Comment = ({ children, ...rest }) => {
+const Comment = ({ id, username, comment, date }) => {
   // 이벤트 위임
   const handleComment = e => {
     e.preventDefault();
@@ -23,34 +25,60 @@ const Comment = ({ children, ...rest }) => {
   return (
     <CommentBox>
       <div>
-        <span>조성민</span>
-        <p>댓글내용이다!!!</p>
+        <Name>{username}</Name>
+        <ButtonsWrap onClick={handleComment}>
+          <ButtonEle>
+            <EditIcon />
+          </ButtonEle>
+          <ButtonEle>
+            <DeleteIcon />
+          </ButtonEle>
+        </ButtonsWrap>
       </div>
-      <div>
-        <span>2020-10-12 15:29:00</span>
-        <div onClick={handleComment}>
-          <ButtonEle>수정</ButtonEle>
-          <ButtonEle>삭제</ButtonEle>
-        </div>
-      </div>
+      <Desc>{comment}</Desc>
+      <Date>{date}</Date>
     </CommentBox>
   );
 };
 
 const CommentBox = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background-color: #ffe065;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  list-style: none;
+  background-color: #eaeaea;
 
   & > div {
     display: flex;
     align-items: center;
+    width: 100%;
+  }
+`;
 
-    & > span {
-      margin-right: 20px;
+const Name = styled.span`
+  margin-right: 10px;
+  flex-grow: 1;
+`;
+const Desc = styled.p`
+  margin: 0;
+  flex-grow: 4;
+`;
+const Date = styled.span`
+  font-size: 12px;
+`;
+const ButtonsWrap = styled.div`
+  & > button {
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+    color: #6889b6;
+
+    &:hover {
+      background-color: transparent;
     }
+  }
+  & > button:first-child {
+    margin-right: 5px;
   }
 `;
 
