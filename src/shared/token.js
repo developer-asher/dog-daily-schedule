@@ -7,7 +7,7 @@ const setToken = token => {
 };
 
 const removeToken = name => {
-  sessionStorage.removeItem('auth');
+  sessionStorage.removeItem(name);
 };
 
 export { getToken, setToken, removeToken };
