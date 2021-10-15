@@ -6,7 +6,7 @@ const InputEle = ({ ...rest }) => {
 };
 
 const Input = styled.input`
-  padding: 10px 5px;
+  padding: 15px 5px;
   font-size: 14px;
 `;
 
