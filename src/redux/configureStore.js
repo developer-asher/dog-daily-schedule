@@ -5,11 +5,15 @@ import thunk from 'redux-thunk';
 
 // modules
 import User from './modules/user';
+import Comment from './modules/comment';
+import Image from './modules/image';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   user: User,
+  comment: Comment,
+  image: Image,
   router: connectRouter(history),
 });
 
