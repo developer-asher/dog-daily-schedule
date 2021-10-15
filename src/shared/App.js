@@ -11,17 +11,17 @@ import Detail from '../pages/Detail';
 import Write from '../pages/Write';
 import PostList from '../pages/PostList';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import authHeader from './authHeader';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
+
   const token = sessionStorage.getItem('auth');
+  const userid = localStorage.getItem('userid');
 
   useEffect(() => {
     if (token) {
-      dispatch(userActions.signinCheckDB());
+      dispatch(userActions.login({ userid: userid }));
     }
   }, []);
 

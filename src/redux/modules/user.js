@@ -7,9 +7,11 @@ import { getToken, setToken, removeToken } from '../../shared/token';
 // action type
 const SET_USER = 'SET_USER';
 const LOGOUT = 'LOGOUT';
+const LOGIN = 'LOGIN';
 
 // action creator
 const setUser = createAction(SET_USER, info => ({ info }));
+const login = createAction(LOGIN, userid => ({ userid }));
 const logout = createAction(LOGOUT, info => ({ info }));
 
 const initialState = {
@@ -33,7 +35,8 @@ const signinDB = (id, pwd) => {
 
       // 토큰 받아올때 유저 정보도 같이 받아야함.
       setToken(data.token);
-      dispatch(setUser(id));
+      // 임의로 로그인 유지를 위해 userid에 id 값 할당
+      dispatch(setUser({ userid: id }));
       history.replace('/');
     } catch (error) {
       console.log('로그인에 실패했습니다.', error);
@@ -46,15 +49,15 @@ const signinCheckDB = () => {
     //
     console.log('로그인 체크 미들웨어');
 
-    try {
-      const result = await apis.signInCheck();
+    // try {
+    //   const result = await apis.signInCheck();
 
-      // 로그인 체크 시 토큰에 맞는 유저 정보 받아야함
-      console.log(result);
-      // dispatch(setUser(user_info));
-    } catch (error) {
-      console.log('로그인 확인에 실패했습니다.', error);
-    }
+    //   // 로그인 체크 시 토큰에 맞는 유저 정보 받아야함
+    //   console.log(result);
+    //   // dispatch(setUser(user_info));
+    // } catch (error) {
+    //   console.log('로그인 확인에 실패했습니다.', error);
+    // }
   };
 };
 
@@ -85,6 +88,7 @@ export default handleActions(
     [SET_USER]: (state, action) =>
       produce(state, draft => {
         setCookie('is_login', true);
+        localStorage.setItem('userid', action.payload.info?.userid);
 
         draft.info = action.payload.info;
         draft.is_login = true;
@@ -92,9 +96,17 @@ export default handleActions(
     [LOGOUT]: (state, action) =>
       produce(state, draft => {
         removeCookie('is_login');
+        removeToken('auth');
+
+        localStorage.removeItem('userid');
 
         draft.is_login = false;
         draft.info = null;
+      }),
+    [LOGIN]: (state, action) =>
+      produce(state, draft => {
+        draft.is_login = true;
+        draft.info = action.payload.userid;
       }),
   },
   initialState,
@@ -104,5 +116,6 @@ export const userActions = {
   signinDB,
   signinCheckDB,
   signupDB,
+  login,
   logout,
 };
