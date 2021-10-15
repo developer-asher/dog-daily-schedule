@@ -7,6 +7,7 @@ const TextAreaEle = ({ children, ...rest }) => {
 
 const TextArea = styled.textarea`
   width: 100%;
+  ${props => (props.padding ? `padding:10px;` : ``)}
 `;
 
 export default TextAreaEle;

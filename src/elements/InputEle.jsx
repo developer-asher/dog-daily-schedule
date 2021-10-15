@@ -6,8 +6,12 @@ const InputEle = ({ ...rest }) => {
 };
 
 const Input = styled.input`
-  padding: 15px 5px;
+  ${props => (props.margin ? `margin: ${props.margin};` : ``)};
+  ${props =>
+    props.border_style ? `border-style: ${props.border_style};` : ``};
+  padding: ${props => (props.padding ? `${props.padding};` : `15px 5px`)};
   font-size: 14px;
+  ${props => (props.outline ? `outline: ${props.outline};` : ``)};
 `;
 
 export default InputEle;

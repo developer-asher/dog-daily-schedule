@@ -5,7 +5,7 @@ const instance = axios.create({
   baseURL: 'http://3.35.135.17:8080',
   withCredentials: true,
   headers: {
-    'content-type': 'application/json;charset=UTF-8',
+    'Content-Type': 'application/json;charset=UTF-8',
     accept: 'application/json',
   },
 });
@@ -22,6 +22,12 @@ const apis = {
   // 게시글 추가
   addContentPost: post =>
     instance.post('/write', post, { headers: authHeader() }),
+  // 이미지 업로드
+  addImagePost: formdata =>
+    instance.post('/write', formdata, {
+      headers: authHeader(),
+      'Content-Type': 'multipart/form-data',
+    }),
 };
 
 export default apis;

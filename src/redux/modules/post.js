@@ -37,6 +37,7 @@ const getPostDB = () => {
       });
   };
 };
+
 const addPostDB = post => {
   return (dispatch, getState, { history }) => {
     console.log(post);
@@ -49,6 +50,22 @@ const addPostDB = post => {
 
         dispatch(addPost(new_post));
         history.replace('/');
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+};
+
+const addImageDB = formdata => {
+  return (dispatch, getState, { history }) => {
+    console.log(formdata);
+
+    apis
+      .addImagePost(formdata)
+      .then(res => {
+        console.log('이미지 업로드에 성공했습니다.');
+        console.log(res);
       })
       .catch(err => {
         console.error(err);
@@ -75,4 +92,5 @@ export const postActions = {
   addPost,
   addPostDB,
   getPostDB,
+  addImageDB,
 };

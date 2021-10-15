@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import LoginIcon from '@mui/icons-material/Login';
@@ -7,45 +7,46 @@ import Upload from '../elements/Upload';
 import ImageEle from '../elements/ImageEle';
 import ButtonEle from '../elements/ButtonEle';
 import TextAreaEle from '../elements/TextAreaEle';
+import InputEle from '../elements/InputEle';
 import { postActions } from '../redux/modules/post';
 
-const image_style = {
-  maxWidth: '100%',
-  width: 'auto',
-  height: '380px',
-  margin: '30px auto',
-};
-
 const Write = props => {
-  const is_login = true;
-
-  const dispatch = useDispatch();
   const { history } = props;
-  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const user_id = sessionStorage.getItem('userid');
+  const is_login = useSelector(state => state.user.is_login);
   const { preview, file } = useSelector(state => state.image);
 
-  const [content, setContent] = React.useState('');
+  const [input, setInput] = useState({ title: '', contents: '' });
+  const { title, contents } = input;
 
-  const changeContent = e => {
-    setContent(e.target.value);
+  const handleChange = e => {
+    const { value, name } = e.target;
+
+    setInput({
+      ...input,
+      [name]: value,
+    });
   };
 
   const addPost = () => {
+    console.log(title, contents);
     // 이미지 업로드 작업 보류
-    // const formData = new FormData();
-    // console.log(file);
-    // formData.append('files', file);
-    // console.log(formData);
+    const formData = new FormData();
+    const image_url = file && URL.createObjectURL(file);
+
+    formData.append('file', file);
 
     const post = {
-      userid: 'jsm5272',
-      username: 'nick_name',
-      title: '제목이야',
-      imageurl: '이미지url',
-      contents: content,
+      userid: user_id,
+      username: '임시 닉네임',
+      title: title,
+      contents: contents,
+      syncid: file.lastModified,
     };
 
     dispatch(postActions.addPostDB(post));
+    // dispatch(postActions.addImageDB(formData));
   };
 
   if (!is_login) {
@@ -69,20 +70,38 @@ const Write = props => {
     <>
       <TextBox>
         <Text1>게시글 작성</Text1>
+        <InputEle
+          name='title'
+          value={title}
+          placeholder='제목'
+          margin='0 0 20px 0'
+          border_style='none none solid none'
+          padding='10px 5px'
+          outline='none'
+          onChange={handleChange}
+        />
         <Upload />
-        {/* <ImageBox>
+        <ImageBox>
           <ImageEle
             src={preview ? preview : 'http://via.placeholder.com/400x300'}
-            style={image_style}
+            max_width='100%'
+            width='auto'
+            height='350px'
+            margin='20px auto'
           />
-        </ImageBox> */}
+        </ImageBox>
         <TextAreaEle
-          value={content}
+          name='contents'
+          value={contents}
           rows='10'
           placeholder='게시글 작성'
-          onChange={changeContent}
+          onChange={handleChange}
+          padding='10px'
         />
-        <ButtonEle onClick={addPost} style={{ marginTop: '20px' }}>
+        <ButtonEle //
+          onClick={addPost}
+          style={{ marginTop: '20px' }}
+        >
           게시글 작성
         </ButtonEle>
       </TextBox>
@@ -105,7 +124,7 @@ const ImageBox = styled.div``;
 
 const Text1 = styled.p`
   margin-top: 0;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
 `;
 
