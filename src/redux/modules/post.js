@@ -27,9 +27,10 @@ const getPostDB = () => {
     apis
       .getContentPost()
       .then(res => {
-        console.log(res);
-        // const post_list = res.data;
-        // dispatch(setPost(post_list));
+        console.log('게시글을 불러오는데 성공했습니다!');
+        const post_list = res.data;
+
+        dispatch(setPost(post_list));
       })
       .catch(err => {
         console.error(err);
@@ -43,9 +44,11 @@ const addPostDB = post => {
     apis
       .addContentPost(post)
       .then(res => {
-        console.log(res);
-        // const post_list = res.data;
-        // dispatch(setPost(post_list));
+        console.log('게시글 작성에 성공했습니다!');
+        const new_post = res.data;
+
+        dispatch(addPost(new_post));
+        history.replace('/');
       })
       .catch(err => {
         console.error(err);
@@ -57,10 +60,12 @@ export default handleActions(
   {
     [SET_POST]: (state, action) =>
       produce(state, draft => {
-        draft.list = action.payload.list;
+        draft.list = action.payload.post_list;
       }),
-
-    [ADD_POST]: (state, action) => produce(state, draft => {}),
+    [ADD_POST]: (state, action) =>
+      produce(state, draft => {
+        draft.list.push(action.payload.post);
+      }),
   },
   initialState,
 );

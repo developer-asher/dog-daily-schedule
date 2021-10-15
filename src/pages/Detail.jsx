@@ -5,43 +5,16 @@ import BackspaceIcon from '@mui/icons-material/Backspace';
 import Post from '../components/Post';
 import CommentList from '../components/CommentList';
 import FlexWrapEle from '../elements/FlexWrapEle';
+import { useSelector } from 'react-redux';
 
 const Detail = props => {
   const { history } = props;
+  const post_list = useSelector(state => state.post.list);
   const id = props.match.params.id;
   const pathname = props.location.pathname;
 
-  const post = [
-    {
-      id: '123',
-      username: '조성민',
-      date: '2021-10-11 15:51',
-      title: '댕댕이의 하루일과',
-      image_url:
-        'https://t1.daumcdn.net/liveboard/holapet/0e5f90af436e4c218343073164a5f657.JPG',
-      content: '안녕',
-    },
-    {
-      id: '345',
-      username: '박시준',
-      date: '2021-10-14 09:00',
-      title: '댕댕이의 하루일과',
-      image_url:
-        'https://t1.daumcdn.net/liveboard/holapet/0e5f90af436e4c218343073164a5f657.JPG',
-      content: '반가워',
-    },
-    {
-      id: '567',
-      username: '이민국',
-      date: '2021-10-12 10:51',
-      title: '댕댕이의 하루일과',
-      image_url:
-        'https://t1.daumcdn.net/liveboard/holapet/0e5f90af436e4c218343073164a5f657.JPG',
-      content: '테스트중이야',
-    },
-  ];
-  const sort_post = post.filter(item => {
-    return item.id === id;
+  const sort_post = post_list.find(item => {
+    return item.id === parseInt(id);
   });
 
   return (
@@ -53,11 +26,14 @@ const Detail = props => {
           position: 'relative',
         }}
       >
-        {pathname.includes('detail') ? ( //
-          <Post detail {...sort_post[0]} />
-        ) : (
-          <></>
-        )}
+        {
+          //
+          pathname.includes('detail') ? ( //
+            <Post detail {...sort_post} />
+          ) : (
+            <></>
+          )
+        }
         <CommentList id={id} />
         <BackspaceIcon
           style={{
