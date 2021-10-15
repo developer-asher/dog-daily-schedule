@@ -35,7 +35,7 @@ const Header = props => {
 
     if (text === '로그아웃') {
       dispatch(userActions.logout());
-      history.push('/signup');
+      history.push('/signin');
     }
   };
 
