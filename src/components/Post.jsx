@@ -1,11 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import FlexWrapEle from '../elements/FlexWrapEle';
+import { useSelector } from 'react-redux';
 
 const Post = props => {
-  const { image_url, username, date, title, content, detail, onClick } = props;
+  const {
+    image_url,
+    userid,
+    username,
+    createdAt,
+    title,
+    content,
+    detail,
+    onClick,
+  } = props;
+  const local_userid = localStorage.getItem('userid');
+  console.log(local_userid, userid);
 
+  // post in detail
   if (detail) {
     return (
       <PostItem detail>
@@ -15,7 +30,7 @@ const Post = props => {
           align_items='flex-start'
         >
           <UserName detail>{username}</UserName>
-          <Date detail>{date}</Date>
+          <Date detail>{createdAt}</Date>
           {/* <Title detail>{title}</Title> */}
           <Contents detail>{content}</Contents>
         </FlexWrapEle>
@@ -29,22 +44,34 @@ const Post = props => {
         <PostImage src={image_url} />
         <UserInfo>
           <UserName>{username}</UserName>
-          <Date>{date}</Date>
+          <Date>{createdAt}</Date>
+          <Title>{title}</Title>
+          {local_userid === userid ? (
+            <DeleteIcon
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '10px',
+                color: '#40517d',
+              }}
+            />
+          ) : (
+            <></>
+          )}
         </UserInfo>
-        <Title>{title}</Title>
-        <Contents>{content}</Contents>
+        {/* <Contents>{content}</Contents> */}
       </PostItem>
     </>
   );
 };
 
 Post.defaultProps = {
-  username: '조성민',
-  date: '2021-10-11 15:51',
-  title: '댕댕이의 하루일과',
+  // username: '조성민',
+  // date: '2021-10-11 15:51',
+  // title: '댕댕이의 하루일과',
+  // content: '콘텐츠 내용이야',
   image_url:
     'https://t1.daumcdn.net/liveboard/holapet/0e5f90af436e4c218343073164a5f657.JPG',
-  content: '콘텐츠 내용이야',
 };
 
 const PostItem = styled.div`
@@ -57,9 +84,9 @@ const PostItem = styled.div`
       : `
         display: flex;
         flex-direction: column;
-        width: 21%;
+        width: 30%;
         height: 450px;
-        margin: 40px 2%;
+        margin: 40px calc(10% / 6);
         border: 2px inset #ff9785;
         border-radius: 0 0 0 40px;
         background-color: #fae3d9;
@@ -82,8 +109,8 @@ const PostImage = styled.div`
 `;
 
 const UserInfo = styled.div`
-  display: flex;
-  justify-content: space-around;
+  position: relative;
+  padding: 10px;
 `;
 
 const UserName = styled.h2`
@@ -93,6 +120,7 @@ const UserName = styled.h2`
         margin: 10px 0 0 0;
         font-size: 15px;`
       : `
+        margin: 5px 0;
         font-size: 15px;`};
 `;
 
@@ -112,8 +140,7 @@ const Title = styled.h1`
         margin: 10px 0;
         font-size: 18px;`
       : `
-        display: flex;
-        padding: 0px 0px 0px 10px;`};
+        font-size: 20px;`};
 `;
 
 const Contents = styled.p`
