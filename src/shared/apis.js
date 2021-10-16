@@ -32,6 +32,11 @@ const apis = {
     }),
 
   // 댓글
+
+  getCommentPost: post_id =>
+    instance.get(`/detail/${post_id}`, {
+      headers: authHeader(),
+    }),
   addCommentPost: (comment_data, post_id) =>
     instance.post(`/detail/${post_id}`, comment_data, {
       headers: authHeader(),

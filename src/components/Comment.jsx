@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import ButtonEle from '../elements/ButtonEle';
 import { commentActions } from '../redux/modules/comment';
 
-const Comment = ({ id, username, comment, date }) => {
+const Comment = ({ userid, comment, createdAt }) => {
   const dispatch = useDispatch();
 
   const editComment = e => {
@@ -20,7 +20,7 @@ const Comment = ({ id, username, comment, date }) => {
   return (
     <CommentBox>
       <div>
-        <Name>{username}</Name>
+        <Name>{userid}</Name>
         <ButtonsWrap>
           <ButtonEle>
             <EditIcon onClick={editComment} />
@@ -31,7 +31,7 @@ const Comment = ({ id, username, comment, date }) => {
         </ButtonsWrap>
       </div>
       <Desc>{comment}</Desc>
-      <Date>{date}</Date>
+      <Date>{createdAt}</Date>
     </CommentBox>
   );
 };
