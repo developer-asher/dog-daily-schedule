@@ -6,8 +6,7 @@
 
 <br />
 
-
-여기 이미지넣자
+https://user-images.githubusercontent.com/66337717/137587388-7e8f28da-7f78-41dd-bbcf-e9cbe5332e5d.mp4
 
 <br />
 
@@ -34,9 +33,10 @@
 
 <br />
 
+
 ## 3.실행영상링크 🎞
      
-  [멍일과 시연 영상 보러가기](https://www.youtube.com/watch?v=Sd98UjrPmB4)
+     
      
 <br />
 
