@@ -16,7 +16,6 @@ const PostList = props => {
 
   const handleClick = (e, postid) => {
     if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-      console.log('삭제버튼 클릭', postid);
       dispatch(postActions.deletePostDB(postid));
     } else {
       history.push(`/detail/${postid}`);
