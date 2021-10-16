@@ -9,7 +9,6 @@ import Comment from './Comment';
 const CommentList = props => {
   const dispatch = useDispatch();
   const comments = useSelector(state => state.comment.list);
-  console.log(comments);
 
   useEffect(() => {
     // 최초에 한번 해당 게시글의 댓글 가져오기

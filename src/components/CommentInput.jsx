@@ -23,7 +23,7 @@ const CommentInput = props => {
   const writeComment = e => {
     e.preventDefault();
 
-    dispatch(commentActions.setCommentDB(props.id, '테스트', comment));
+    dispatch(commentActions.setCommentDB(props.id, comment));
 
     setInput({
       comment: '',

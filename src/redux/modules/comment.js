@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import moment from 'moment';
+import apis from '../../shared/apis';
 
 const GET_COMMENT = 'GET_COMMENT';
 const SET_COMMENT = 'SET_COMMENT';
@@ -62,18 +63,27 @@ const getCommentDB = post_id => {
   };
 };
 
-const setCommentDB = (post_id, nick_name, comment) => {
+const setCommentDB = (post_id, comment) => {
   return function (dispatch, getState, { history }) {
-    const comment_info = {
-      post_id: post_id,
-      username: nick_name,
+    console.log('댓글 저장하기');
+
+    const user_id = localStorage.getItem('userid');
+
+    const comment_data = {
+      postId: post_id,
+      userid: user_id,
+      name: '테스트',
       comment: comment,
     };
-    console.log(comment_info);
 
-    dispatch(setComment(comment_info));
-
-    // console.log(nick_name, comment, '댓글 저장하기');
+    apis
+      .addCommentPost(comment_data, post_id)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 };
 
