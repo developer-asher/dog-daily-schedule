@@ -26,7 +26,7 @@ const initialPost = {
 };
 
 const getPostDB = () => {
-  return (dispatch, getState, { history }) => {
+  return function (dispatch, getState, { history }) {
     apis
       .getContentPost()
       .then(res => {
@@ -41,10 +41,29 @@ const getPostDB = () => {
   };
 };
 
-const addPostDB = post => {
-  return (dispatch, getState, { history }) => {
-    console.log(post);
+const getOnePostDB = id => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .getContentPost()
+      .then(res => {
+        console.log('게시글을 불러오는데 성공했습니다!');
+        const post_list = res.data;
 
+        const sort_list = post_list.find(post => {
+          return post.postid === parseInt(id);
+        });
+
+        dispatch(setPost([sort_list]));
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+};
+
+const addPostDB = post => {
+  return function (dispatch, getState, { history }) {
+    //
     apis
       .addContentPost(post)
       .then(res => {
@@ -83,7 +102,7 @@ const deletePostDB = post_id => {
 };
 
 const addImageDB = formdata => {
-  return (dispatch, getState, { history }) => {
+  return function (dispatch, getState, { history }) {
     console.log(formdata);
 
     apis
@@ -117,6 +136,7 @@ export const postActions = {
   addPost,
   addPostDB,
   getPostDB,
+  getOnePostDB,
   deletePostDB,
   addImageDB,
 };

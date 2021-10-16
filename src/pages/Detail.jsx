@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 
 import Post from '../components/Post';
 import CommentList from '../components/CommentList';
 import FlexWrapEle from '../elements/FlexWrapEle';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { postActions } from '../redux/modules/post';
 
 const Detail = props => {
   const { history } = props;
+  const dispatch = useDispatch();
   const post_list = useSelector(state => state.post.list);
+
   const id = props.match.params.id;
   const pathname = props.location.pathname;
 
   const sort_post = post_list.find(item => {
-    return item.id === parseInt(id);
+    return item.postid === parseInt(id);
   });
+
+  useEffect(() => {
+    if (sort_post) {
+      return false;
+    }
+    // get one post
+    dispatch(postActions.getOnePostDB(id));
+  }, []);
 
   return (
     <Container>
