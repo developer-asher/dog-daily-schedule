@@ -3,7 +3,6 @@ import authHeader from './authHeader';
 
 const instance = axios.create({
   baseURL: 'http://3.35.135.17:8080',
-  // baseURL: 'http://withoh.shop',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
@@ -32,7 +31,6 @@ const apis = {
     }),
 
   // 댓글
-
   getCommentPost: post_id =>
     instance.get(`/detail/${post_id}`, {
       headers: authHeader(),
@@ -41,10 +39,14 @@ const apis = {
     instance.post(`/detail/${post_id}`, comment_data, {
       headers: authHeader(),
     }),
-  deleteCommentPost: (post_id, comment_id) =>
-    instance.delete(`/detail/${comment_id}`, post_id, {
-      headers: authHeader(),
-    }),
+  deleteCommentPost: comment_info =>
+    instance.delete(
+      `/detail/${comment_info.commentid}`,
+      { data: comment_info },
+      {
+        headers: authHeader(),
+      },
+    ),
   editCommentPost: (comment_data, comment_id) =>
     instance.post(`/detail/${comment_id}`, comment_data, {
       headers: authHeader(),
