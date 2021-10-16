@@ -42,16 +42,17 @@ const setCommentDB = (post_id, comment) => {
     const user_id = localStorage.getItem('userid');
 
     const comment_data = {
-      postId: post_id,
+      postid: post_id,
       userid: user_id,
-      name: '테스트',
       comment: comment,
     };
 
     apis
       .addCommentPost(comment_data, post_id)
       .then(res => {
-        console.log(res);
+        const comment_list = res.data;
+
+        dispatch(getComment(comment_list));
       })
       .catch(error => {
         console.log(error);
