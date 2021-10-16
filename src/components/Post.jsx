@@ -18,7 +18,6 @@ const Post = props => {
     onClick,
   } = props;
   const local_userid = localStorage.getItem('userid');
-  console.log(local_userid, userid);
 
   // post in detail
   if (detail) {

@@ -7,31 +7,41 @@ import { useDispatch } from 'react-redux';
 import ButtonEle from '../elements/ButtonEle';
 import { commentActions } from '../redux/modules/comment';
 
-const Comment = ({ id, username, comment, date }) => {
+const Comment = ({ userid, postid, commentid, comment, createdAt }) => {
   const dispatch = useDispatch();
+  const local_userid = localStorage.getItem('userid');
 
   const editComment = e => {
     dispatch(commentActions.editCommentDB());
   };
-  const deleteComment = e => {
-    dispatch(commentActions.deleteCommentDB());
+  const deleteComment = (post_id, comment_id) => {
+    console.log(comment_id);
+    dispatch(commentActions.deleteCommentDB(post_id, comment_id));
   };
 
   return (
     <CommentBox>
       <div>
-        <Name>{username}</Name>
+        <Name>{userid}</Name>
         <ButtonsWrap>
-          <ButtonEle>
+          {/* <ButtonEle>
             <EditIcon onClick={editComment} />
-          </ButtonEle>
-          <ButtonEle>
-            <DeleteIcon onClick={deleteComment} />
-          </ButtonEle>
+          </ButtonEle> */}
+          {userid === local_userid ? (
+            <ButtonEle>
+              <DeleteIcon
+                onClick={() => {
+                  deleteComment(postid, commentid);
+                }}
+              />
+            </ButtonEle>
+          ) : (
+            <></>
+          )}
         </ButtonsWrap>
       </div>
       <Desc>{comment}</Desc>
-      <Date>{date}</Date>
+      <Date>{createdAt}</Date>
     </CommentBox>
   );
 };

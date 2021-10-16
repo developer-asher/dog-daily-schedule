@@ -8,10 +8,10 @@ import Comment from './Comment';
 
 const CommentList = props => {
   const dispatch = useDispatch();
-  const comments = useSelector(state => state.comment.list);
+  const comment_list = useSelector(state => state.comment.list);
+  console.log(comment_list, comment_list.length);
 
   useEffect(() => {
-    // 최초에 한번 해당 게시글의 댓글 가져오기
     dispatch(commentActions.getCommentDB(props.id));
   }, []);
 
@@ -20,7 +20,7 @@ const CommentList = props => {
       <Comments>
         <CommentInput id={props.id} />
         <CommentWrap>
-          {comments.map((list, index) => {
+          {comment_list.map((list, index) => {
             return <Comment key={index} {...list} />;
           })}
         </CommentWrap>

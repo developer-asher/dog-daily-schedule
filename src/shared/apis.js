@@ -32,16 +32,21 @@ const apis = {
     }),
 
   // 댓글
+
+  getCommentPost: post_id =>
+    instance.get(`/detail/${post_id}`, {
+      headers: authHeader(),
+    }),
   addCommentPost: (comment_data, post_id) =>
     instance.post(`/detail/${post_id}`, comment_data, {
       headers: authHeader(),
     }),
-  editCommentPost: (comment_data, comment_id) =>
-    instance.post(`/detail/${comment_id}`, comment_data, {
+  deleteCommentPost: (post_id, comment_id) =>
+    instance.delete(`/detail/${comment_id}`, post_id, {
       headers: authHeader(),
     }),
-  deleteCommentPost: comment_id =>
-    instance.post(`/detail/${comment_id}`, {
+  editCommentPost: (comment_data, comment_id) =>
+    instance.post(`/detail/${comment_id}`, comment_data, {
       headers: authHeader(),
     }),
 };
