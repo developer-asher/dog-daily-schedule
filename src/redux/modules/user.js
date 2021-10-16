@@ -76,6 +76,7 @@ const signupDB = (id, nick_name, pwd) => {
       const result = apis.signUpPost(user_info);
 
       console.log('회원가입에 성공했습니다.', result);
+      alert('회원가입에 성공했습니다.');
       history.replace('/signin');
     } catch (error) {
       console.log('회원가입에 실패했습니다.', error);
