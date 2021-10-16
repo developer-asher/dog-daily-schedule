@@ -78,15 +78,19 @@ const editCommentDB = comment_id => {
 const deleteCommentDB = (post_id, comment_id) => {
   return function (dispatch, getState, { history }) {
     console.log('댓글 삭제하기');
-    // console.log('코멘트 아이디:', comment_id);
+
+    const comment_info = {
+      commentid: comment_id,
+      postid: post_id,
+    };
 
     apis
-      .deleteCommentPost(post_id, comment_id)
+      .deleteCommentPost(comment_info)
       .then(res => {
         console.log(res);
-        // const comment_list = res.data;
+        const comment_list = res.data;
 
-        // dispatch(getComment(comment_list));
+        dispatch(getComment(comment_list));
       })
       .catch(error => {
         console.log(error);
