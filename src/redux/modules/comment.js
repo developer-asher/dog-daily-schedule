@@ -87,15 +87,33 @@ const setCommentDB = (post_id, comment) => {
   };
 };
 
-const editCommentDB = (post_id, comment_id) => {
+const editCommentDB = comment_id => {
   return function (dispatch, getState, { history }) {
     console.log('댓글 수정하기');
+
+    // apis
+    //   .editCommentPost(comment_id)
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   };
 };
 
-const deleteCommentDB = (post_id, comment_id) => {
+const deleteCommentDB = comment_id => {
   return function (dispatch, getState, { history }) {
     console.log('댓글 삭제하기');
+
+    // apis
+    //   .deleteCommentPost(comment_id)
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   };
 };
 

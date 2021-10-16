@@ -2,36 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch } from 'react-redux';
 
 import ButtonEle from '../elements/ButtonEle';
+import { commentActions } from '../redux/modules/comment';
 
 const Comment = ({ id, username, comment, date }) => {
-  // 이벤트 위임
-  const handleComment = e => {
-    e.preventDefault();
+  const dispatch = useDispatch();
 
-    if (e.target.tagName !== 'BUTTON') {
-      return false;
-    }
-
-    if (e.target.textContent === '수정') {
-      console.log('수정');
-    }
-    if (e.target.textContent === '삭제') {
-      console.log('삭제');
-    }
+  const editComment = e => {
+    dispatch(commentActions.editCommentDB());
+  };
+  const deleteComment = e => {
+    dispatch(commentActions.deleteCommentDB());
   };
 
   return (
     <CommentBox>
       <div>
         <Name>{username}</Name>
-        <ButtonsWrap onClick={handleComment}>
+        <ButtonsWrap>
           <ButtonEle>
-            <EditIcon />
+            <EditIcon onClick={editComment} />
           </ButtonEle>
           <ButtonEle>
-            <DeleteIcon />
+            <DeleteIcon onClick={deleteComment} />
           </ButtonEle>
         </ButtonsWrap>
       </div>
