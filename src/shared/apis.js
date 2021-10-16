@@ -11,17 +11,18 @@ const instance = axios.create({
 });
 
 const apis = {
-  // 로그인
-  signInPost: user_info => instance.post('/user/login', user_info),
-  // 로그인체크
-  signInCheck: () => instance.get('/user/login', { headers: authHeader() }),
   // 회원가입
+  signInPost: user_info => instance.post('/user/login', user_info),
+  signInCheck: () => instance.get('/user/login', { headers: authHeader() }),
   signUpPost: user_info => instance.post('/user/signup', user_info),
-  // 전체 게시글
+
+  // 게시글
   getContentPost: () => instance.get('/'),
-  // 게시글 추가
   addContentPost: post =>
     instance.post('/write', post, { headers: authHeader() }),
+  deleteContentPost: post_id =>
+    instance.delete(`/edit/${post_id}`, { headers: authHeader() }),
+
   // 이미지 업로드
   addImagePost: formdata =>
     instance.post('/write', formdata, {

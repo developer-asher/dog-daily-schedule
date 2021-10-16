@@ -14,12 +14,13 @@ const PostList = props => {
   const dispatch = useDispatch();
   const post_list = useSelector(state => state.post.list);
 
-  // console.log(post_list);
-  const handleClick = (e, id) => {
+  const handleClick = (e, postid) => {
     if (e.target.tagName === 'svg' || e.target.tagName === 'path') {
-      console.log('삭제버튼 클릭', id);
+      console.log('삭제버튼 클릭', postid);
+      dispatch(postActions.deletePostDB(postid));
+    } else {
+      history.push(`/detail/${postid}`);
     }
-    history.push(`/detail/${id}`);
   };
 
   useEffect(() => {
@@ -34,9 +35,9 @@ const PostList = props => {
         {post_list.map((item, index) => {
           return (
             <Post
-              key={item.id}
+              key={item.postid}
               onClick={e => {
-                handleClick(e, item.id);
+                handleClick(e, item.postid);
               }}
               {...item}
             />

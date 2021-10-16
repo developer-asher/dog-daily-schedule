@@ -1,12 +1,15 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import apis from '../../shared/apis';
+import { LocalConvenienceStoreOutlined } from '@mui/icons-material';
 
 const SET_POST = 'SET_POST';
 const ADD_POST = 'ADD_POST';
+const DELETE_POST = 'DELETE_POST';
 
 const setPost = createAction(SET_POST, post_list => ({ post_list }));
 const addPost = createAction(ADD_POST, post => ({ post }));
+const deletePost = createAction(DELETE_POST, post_id => ({ post_id }));
 
 const initialState = {
   list: [],
@@ -57,6 +60,28 @@ const addPostDB = post => {
   };
 };
 
+const deletePostDB = post_id => {
+  return function (dispatch, getState, { history }) {
+    //
+    apis
+      .deleteContentPost(post_id)
+      .then(res => {
+        console.log('게시글 삭제 완료');
+        const post_list = res.data;
+
+        if (post_list.lenght <= 1) {
+          dispatch(setPost([post_list]));
+        }
+
+        dispatch(setPost(post_list));
+        history.replace('/');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
 const addImageDB = formdata => {
   return (dispatch, getState, { history }) => {
     console.log(formdata);
@@ -92,5 +117,6 @@ export const postActions = {
   addPost,
   addPostDB,
   getPostDB,
+  deletePostDB,
   addImageDB,
 };
