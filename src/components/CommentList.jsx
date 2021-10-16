@@ -9,7 +9,6 @@ import Comment from './Comment';
 const CommentList = props => {
   const dispatch = useDispatch();
   const comment_list = useSelector(state => state.comment.list);
-  console.log(comment_list, comment_list.length);
 
   useEffect(() => {
     dispatch(commentActions.getCommentDB(props.id));
