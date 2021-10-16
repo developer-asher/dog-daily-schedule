@@ -13,7 +13,7 @@ import { postActions } from '../redux/modules/post';
 const Write = props => {
   const { history } = props;
   const dispatch = useDispatch();
-  const user_id = sessionStorage.getItem('userid');
+  const user_id = localStorage.getItem('userid');
   const is_login = useSelector(state => state.user.is_login);
   const { preview, file } = useSelector(state => state.image);
 
@@ -37,12 +37,13 @@ const Write = props => {
 
     formData.append('file', file);
 
+    // 5개 데이터 모두 필요
     const post = {
       userid: user_id,
       username: '임시 닉네임',
       title: title,
       contents: contents,
-      syncid: file.lastModified,
+      imageurl: '임시url',
     };
 
     dispatch(postActions.addPostDB(post));
