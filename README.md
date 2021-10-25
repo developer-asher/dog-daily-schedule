@@ -53,7 +53,9 @@ https://user-images.githubusercontent.com/66337717/137587388-7e8f28da-7f78-41dd-
 <br/>
 
 ### 조성민 👨
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+axios를 통한 서버 통신과 jwt를 이용한 로그인 유지 작업을 진행했으며,
+무엇보다 백엔드 개발자들과의 협업을 통한 협업의 중요성, 팀빌딩에 대한 중요성을 느꼈습니다.
+한주 동안 개인이 아닌 팀으로써 좋은 팀원과 함께 즐겁게 협업하며 미니프로젝트를 진행했습니다.
 
 ### 이민국 🧔
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
