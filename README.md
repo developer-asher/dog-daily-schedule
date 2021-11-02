@@ -58,6 +58,9 @@ axios를 통한 서버 통신과 jwt를 이용한 로그인 유지 작업을 진
 한주 동안 개인이 아닌 팀으로써 좋은 팀원과 함께 즐겁게 협업하며 미니프로젝트를 진행했습니다.
 
 ### 이민국 🧔
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+막연하게 느꼈던 axios를 직접 사용해 서버와 통신하는 과정에서 axios 사용법에 대해 깊이 공부하고
+생각하게 됬고 백엔드 개발자들과 소통하므로써 협업의 중요성을 느꼈습니다.
+익숙하지 않던 CRUD를 공부하고 적용하며 공부했습니다.
+부족한 부분이 많았던 나를 격려하고 알려주신 모든 팀원들에게 정말 감사한 마음뿐입니다.
 
 
