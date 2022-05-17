@@ -6,7 +6,9 @@
 
 <br />
 
-https://user-images.githubusercontent.com/66337717/137587388-7e8f28da-7f78-41dd-bbcf-e9cbe5332e5d.mp4
+![main](https://user-images.githubusercontent.com/66337717/168747375-8dbe663c-d060-40f2-ba99-a41d49404b2a.gif)
+
+
 
 <br />
 
